@@ -15,12 +15,12 @@ export function NavBar() {
         <div className="container-fluid">
           <ul className="navbar-nav">
             <li className="nav-item m-3">
-              <Link className="nav-link" to="/inventory">
+              <Link className="nav-link" to="inventory">
                 Inventory
               </Link>
             </li>
             <li className="nav-item m-3">
-            <Link className="nav-link" to="/employees">
+            <Link className="nav-link" to="employees">
                 Employees
               </Link>
             </li>

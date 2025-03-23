@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export function Login() {
   const navigation = useNavigate();
   const login = () =>{
-    navigation('/inventory', { replace:true})
+    navigation('/main', { replace:true});
   }
   return (
     <>

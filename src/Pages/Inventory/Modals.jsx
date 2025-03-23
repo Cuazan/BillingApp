@@ -53,7 +53,8 @@ export function AddProductModal() {
 
     function PostElement() {
         PostItem({ name });
-        CloseModal;
+        console.log('hola');
+        CloseModal();
     }
 
 
@@ -183,9 +184,9 @@ export function UpdateProductModal(){
         setProvider(e.target.value);
     }
 
-    function PostElement() {
+    function UpdateElement() {
         PostItem({ name });
-        CloseModal;
+        CloseUpdateModalOpen();
     }
 
     return(
@@ -274,7 +275,7 @@ export function UpdateProductModal(){
                         <button type="button" className="btn btn-danger mt-2" onClick={CloseUpdateModalOpen}>
                             Cancel
                         </button>
-                        <button type="button" id="accept" className="btn btn-primary mt-2" onClick={PostElement}>
+                        <button type="button" id="accept" className="btn btn-primary mt-2" onClick={UpdateElement}>
                             Accept
                         </button>
                     </div>

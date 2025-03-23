@@ -15,19 +15,14 @@ export function NavBar() {
         <div className="container-fluid">
           <ul className="navbar-nav">
             <li className="nav-item m-3">
-              <Link className="nav-link" to="/Inventory">
+              <Link className="nav-link" to="/inventory">
                 Inventory
               </Link>
             </li>
             <li className="nav-item m-3">
-            <Link className="nav-link" to="/Employees">
+            <Link className="nav-link" to="/employees">
                 Employees
               </Link>
-            </li>
-            <li className="nav-item m-3">
-              <a className="nav-link" href="#">
-                Link 3
-              </a>
             </li>
           </ul>
           <button className="btn" id="logout"  onClick={Login}>Logout <i className="fa-solid fa-right-from-bracket"></i> </button>

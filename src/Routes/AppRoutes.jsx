@@ -1,12 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import { Login } from "../Login";
-import { PrivateRoutes } from "./PrivateRoutes";
+import {Layout, Inventory, Employees} from "../Pages"
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/*" element={<PrivateRoutes/>}/>
+      <Route element={<Layout />}>
+        <Route path="/inventory" element={<Inventory />} />
+        <Route path="/employees" element={<Employees />} />
+      </Route>
     </Routes>
   );
 }

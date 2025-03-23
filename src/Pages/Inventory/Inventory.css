@@ -1,0 +1,18 @@
+.table-transparent {
+  background-color: transparent !important;
+  color: white;
+}
+
+.table-transparent thead,
+.table-transparent tbody,
+.table-transparent tr,
+.table-transparent th,
+.table-transparent td {
+  background-color: transparent !important;
+  color: white ;
+}
+
+.i-button{
+  background: #ca6702;
+  color: #edf2f4;
+}

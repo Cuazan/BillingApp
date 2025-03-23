@@ -1,0 +1,13 @@
+.navbar, .nav-link{
+    background: #ae2012;
+    color: aliceblue;
+}
+
+#logout{
+    background: #ca6702;
+    color: #edf2f4;
+}
+
+#logout:hover{
+    color: black;
+}

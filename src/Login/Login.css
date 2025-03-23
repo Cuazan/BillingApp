@@ -1,0 +1,19 @@
+
+
+.card{
+    width: 500px;
+    background: #005f73;
+}
+
+.userNameLabel, .passwordLabel{
+    color: #edf2f4;
+}
+
+.submit{
+    background: #ca6702;
+    color: #edf2f4;
+}
+
+.btn:hover{
+    background-color: #bb3e03;
+}

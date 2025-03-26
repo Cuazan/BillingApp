@@ -26,5 +26,19 @@ export const updateProduct = createSlice({
     }
 });
 
+export const deleteProduct = createSlice({
+    name: 'deleteModal',
+    initialState: { isDeleteProductModalOpen: false},
+    reducers: {
+        onOpenDeleteProductModal: (state) =>{
+            state.isDeleteProductModalOpen = true;
+        },
+        onCloseDeleteModalOpen: (state) =>{
+            state.isDeleteProductModalOpen = false;
+        }
+    }    
+})
+
 export const { onOpenAddProductModal, onCloseModalOpen} = uiSlice.actions;
 export const {onOpenUpdateProductModal, onCloseUpdateModalOpen}= updateProduct.actions;
+export const { onOpenDeleteProductModal, onCloseDeleteModalOpen} = deleteProduct.actions;

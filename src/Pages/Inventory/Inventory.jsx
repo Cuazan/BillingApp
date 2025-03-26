@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { GetProducts } from "../../Requester";
 import "./Inventory.css"
-import {AddProductModal, UpdateProductModal} from "./Modals"
-import { useUiStore } from "../../Hooks";
+import {AddProductModal, DeletePrpductModal, UpdateProductModal} from "./Modals"
+import { useUiStore, useUpdateProducts } from "../../Hooks";
 
 
 export function Inventory() {
@@ -10,6 +10,8 @@ export function Inventory() {
 
   const {OpenAddProductModal}=useUiStore();
   const {OpenUpdateProductModal} = useUiStore();
+  const {OpenDeleteProduct} = useUiStore();
+  const {updateProduct} = useUpdateProducts();
 
   const getProds = async () => {
     try {
@@ -24,6 +26,17 @@ export function Inventory() {
     getProds();
   }, [])
 
+  function UpdateProducts(product) {
+    updateProduct(product);
+    OpenUpdateProductModal();    
+  }
+
+  function DeleteProducts(product){
+    updateProduct(product);
+    OpenDeleteProduct();
+  }
+
+
   const HTMLproducts = products.map((product) => {
     return (
       <tr key={product.id}>
@@ -33,8 +46,8 @@ export function Inventory() {
         <td scope="col">{product.stock}</td>
         <td scope="col">{product.warrantyInformation}</td>
         <td scope="col">{product.sku}</td>
-        <td><button className="btn" onClick={OpenUpdateProductModal}><i className=" fa-solid fa-pen-to-square"></i></button></td>
-        <td><button className="btn"><i className=" fa-solid fa-trash"></i></button></td>
+        <td><button className="btn" onClick={()=>UpdateProducts(product)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
+        <td><button className="btn" onClick={()=>DeleteProducts(product)}><i className=" fa-solid fa-trash"></i></button></td>
       </tr>
     )
   })
@@ -64,6 +77,7 @@ export function Inventory() {
       </table>
       <AddProductModal></AddProductModal>
       <UpdateProductModal></UpdateProductModal>
+      <DeletePrpductModal></DeletePrpductModal>
     </>
   );
 }

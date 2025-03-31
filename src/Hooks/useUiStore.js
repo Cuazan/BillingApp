@@ -8,7 +8,7 @@ export const  useUiStore = () =>{
 
     const dispatch = useDispatch();
 
-    const OpenAddProductModal = () =>{
+    const OpenModal = () =>{
         dispatch(onOpenAddProductModal());
     }
 
@@ -16,7 +16,7 @@ export const  useUiStore = () =>{
         dispatch(onCloseModalOpen());
     }
 
-    const OpenUpdateProductModal = () =>{
+    const OpenUpdateModal = () =>{
         dispatch(onOpenUpdateProductModal());
     }
 
@@ -24,7 +24,7 @@ export const  useUiStore = () =>{
         dispatch(onCloseUpdateModalOpen());
     }
 
-    const OpenDeleteProduct = () =>{
+    const OpenDeleteModal = () =>{
         dispatch(onOpenDeleteProductModal());
     }
 
@@ -37,11 +37,11 @@ export const  useUiStore = () =>{
         isUpdateProductModalOpen,
         isDeleteProductModalOpen,
 
-        OpenAddProductModal,
+        OpenModal,
         CloseModal,
-        OpenUpdateProductModal,
+        OpenUpdateModal,
         CloseUpdateModalOpen,
-        OpenDeleteProduct,
+        OpenDeleteModal,
         CloseDeleteModalOpen
 
     }

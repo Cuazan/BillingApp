@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import "./Modal.css"
-import { useUiStore, useUpdateProducts } from "../../Hooks";
+import { useUiStore, useUpdateEmployee } from "../../Hooks";
 import { PostItem } from '../../Requester'
 import { useState } from "react";
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-export function AddProductModal() {
+export function AddEmployeeModal() {
 
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
@@ -65,7 +65,7 @@ export function AddProductModal() {
                 style={customStyles}
                 closeTimeoutMS={200}
             >
-                <h2>Add item</h2>
+                <h2>Add employee</h2>
                 <hr></hr>
                 <form className="m-3">
                     <div className="mb-4">
@@ -73,7 +73,7 @@ export function AddProductModal() {
                             htmlFor="Item"
                             className="form-label"
                         >
-                            Item
+                            Employee name
                         </label>
                         <input
                             type="text"
@@ -153,9 +153,9 @@ export function AddProductModal() {
     )
 }
 
-export function UpdateProductModal() {
+export function UpdateEmployeeModal() {
     const { isUpdateProductModalOpen, CloseUpdateModalOpen } = useUiStore();
-    const { product } = useUpdateProducts(); 
+    const { employee } = useUpdateEmployee(); 
     
     const [formValues, setFormValues] = useState({
         title: "",
@@ -166,16 +166,16 @@ export function UpdateProductModal() {
     });
 
     useEffect(() => {
-        if (product) {
+        if (employee) {
             setFormValues({
-                title: product.title || "",
-                category: product.category || "",
-                stock: product.stock || "",
-                expirationDate: product.warrantyInformation || "",
-                provider: product.sku || "",
+                title: employee.firstName || "",
+                category: employee.age || "",
+                stock: employee.phone || "",
+                expirationDate: employee.username || "",
+                provider: employee.address || "",
             });
         }
-    }, [product]);
+    }, [employee]);
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -185,9 +185,9 @@ export function UpdateProductModal() {
         }));
     }
 
-     function UpdateElement(product) {
+     function UpdateElement(employee) {
         CloseUpdateModalOpen();
-        console.log(product)
+        console.log(employee)
     }
 
     return (
@@ -197,11 +197,11 @@ export function UpdateProductModal() {
             style={customStyles}
             closeTimeoutMS={200}
         >
-            <h2>Update Item</h2>
+            <h2>Update Employee</h2>
             <hr />
             <form className="m-3">
                 <div className="mb-4">
-                    <label htmlFor="title" className="form-label">Item Name</label>
+                    <label htmlFor="title" className="form-label">Employee Name</label>
                     <input
                         type="text"
                         className="form-control"
@@ -251,7 +251,7 @@ export function UpdateProductModal() {
                         className="form-control"
                         id="provider"
                         name="provider"
-                        value={formValues.provider}
+                        value={formValues.provider.country}
                         onChange={handleChange}
                     />
                 </div>
@@ -268,14 +268,14 @@ export function UpdateProductModal() {
     );
 }
 
-export function DeletePrpductModal() {
+export function DeleteEmployeeModal() {
     const { isDeleteProductModalOpen, CloseDeleteModalOpen } = useUiStore();
-    const{ product } = useUpdateProducts();
+    const{ employee } = useUpdateEmployee();
 
-    const prodId = product.id;
-
+    const employeeID =  employee.id;
+    console.log(employee);
     function Delete() {
-        console.log(prodId);
+        console.log(employeeID)
         CloseDeleteModalOpen();
     }
 
@@ -290,7 +290,7 @@ export function DeletePrpductModal() {
                 <h2>Delete Item</h2>
                 <hr></hr>
                 <form className="m-3">
-                    <h5>Are you sure you wish to delete {product.title}?</h5>
+                    <h5>Are you sure you wish to delete {employee.firstName}?</h5>
                     <div className="d-flex justify-content-between mt-3">
                         <button type="button" className="btn btn-danger mt-2" onClick={CloseDeleteModalOpen}>
                             Cancel

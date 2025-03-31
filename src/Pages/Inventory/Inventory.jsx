@@ -8,9 +8,9 @@ import { useUiStore, useUpdateProducts } from "../../Hooks";
 export function Inventory() {
   const [products, useProducts] = useState([]);
 
-  const {OpenAddProductModal}=useUiStore();
-  const {OpenUpdateProductModal} = useUiStore();
-  const {OpenDeleteProduct} = useUiStore();
+  const {OpenModal}=useUiStore();
+  const {OpenUpdateModal} = useUiStore();
+  const {OpenDeleteModal} = useUiStore();
   const {updateProduct} = useUpdateProducts();
 
   const getProds = async () => {
@@ -28,12 +28,12 @@ export function Inventory() {
 
   function UpdateProducts(product) {
     updateProduct(product);
-    OpenUpdateProductModal();    
+    OpenUpdateModal();    
   }
 
   function DeleteProducts(product){
     updateProduct(product);
-    OpenDeleteProduct();
+    OpenDeleteModal();
   }
 
 
@@ -54,7 +54,7 @@ export function Inventory() {
 
   return (
     <>  
-    <div className="btn i-button m-3" onClick={OpenAddProductModal}>Add Product</div>
+    <div className="btn i-button m-3" onClick={OpenModal}>Add Product</div>
     <div className="btn i-button m-3" onClick={getProds}><i className="fa-solid fa-rotate-right"></i></div>
       <table className="table table-striped table-hover">
         <thead>

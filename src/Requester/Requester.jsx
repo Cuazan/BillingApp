@@ -29,3 +29,15 @@ export async function PostItem({name}) {
         console.error(error);
     }
 }
+
+export async function GetEmployees() {
+    try {
+        const response = await axiosInstance.get(
+            '/users'
+        );
+        return response.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useUiStore } from "../Hooks";
 import { GetProductsFiltered } from "../Requester";
-import "./Modal.css"
+import "./Inventory.css"
 import { useCashRegisterHandler } from "../Hooks/useCashRegisterHandler";
 
 

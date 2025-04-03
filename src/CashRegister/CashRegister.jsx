@@ -37,7 +37,7 @@ export function CashRegister() {
             <div key={product.id} className="border-bottom p-3 item">
                 <div className="d-flex justify-content-between">                    
                 <h5>{product.title}</h5>
-                <span><button className="btn rounded-circle eliminateProd" onClick={()=> ProductToRemove(product.id)}><i class="fa-regular fa-circle-xmark"></i> </button></span>
+                <span><button className="btn rounded-circle eliminateProd" onClick={()=> ProductToRemove(product.id)}><i className="fa-regular fa-circle-xmark"></i> </button></span>
                 </div>
                 <p>ID: {product.id}</p>
                 <div className="d-flex justify-content-between mr-5 p-0 m-0">
@@ -65,11 +65,11 @@ export function CashRegister() {
             </nav>
 
             <div className="row mt-3">
-                <div className="col-12 col-lg-8 pt-3 ps-5">
+                <div className="col-12 col-lg-8 pt-3 ">
                     
                 <AddProductToSell></AddProductToSell>
                 </div>
-                <div className="thisSale col-12 col-lg-4 pt-3 pb-5 pe-5">
+                <div className="thisSale col-12 col-lg-4 pt-3 pb-5">
                     <div className="card showProducts rounded-top">
                         {HTMLproducts}
                     </div>

@@ -3,6 +3,7 @@ import { AddProductToSell } from './Inventory';
 import { useUiStore } from '../Hooks';
 import { useCashRegisterHandler } from '../Hooks/useCashRegisterHandler';
 import { useEffect, useState } from 'react';
+import { AddCustomerModal } from './AddCustomerModal';
 
 export function CashRegister() {
 
@@ -55,7 +56,7 @@ export function CashRegister() {
                 <div className="container-fluid">
                     <ul className="navbar-nav">
                         <li className="m-3">
-                            <button className="addCustomer btn" >
+                            <button className="addCustomer btn" onClick={OpenModal} >
                                 Add Customer
                             </button>
                         </li>
@@ -80,6 +81,7 @@ export function CashRegister() {
                     </div>
                 </div>
             </div>
+            <AddCustomerModal></AddCustomerModal>
         </div>
     )
 }

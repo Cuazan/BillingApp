@@ -212,7 +212,7 @@ export function UpdateEmployeeModal() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="category" className="form-label">Category</label>
+                    <label htmlFor="category" className="form-label">Email</label>
                     <input
                         type="text"
                         className="form-control"
@@ -223,7 +223,7 @@ export function UpdateEmployeeModal() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="stock" className="form-label">Stock</label>
+                    <label htmlFor="stock" className="form-label">Address</label>
                     <input
                         type="text"
                         className="form-control"
@@ -234,7 +234,7 @@ export function UpdateEmployeeModal() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="expirationDate" className="form-label">Expiration Date</label>
+                    <label htmlFor="expirationDate" className="form-label">Phone</label>
                     <input
                         type="text"
                         className="form-control"
@@ -245,7 +245,7 @@ export function UpdateEmployeeModal() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="provider" className="form-label">Provider</label>
+                    <label htmlFor="provider" className="form-label">Role</label>
                     <input
                         type="text"
                         className="form-control"

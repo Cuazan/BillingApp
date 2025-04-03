@@ -62,10 +62,10 @@ export function Employees() {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Name</th>
-              <th scope="col">Category</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Expiration date</th>
-              <th scope="col">Provider</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Role</th>
               <th></th>
               <th></th>
             </tr>

@@ -5,8 +5,6 @@ import { addProd, removeProd } from "../Store";
 export const useCashRegisterHandler = () =>{
     const { libraries } = useSelector(state => state.productHandler);
 
-    console.log(libraries);
-
     const dispatch = useDispatch();
 
     const AddProduct = (prod) =>{

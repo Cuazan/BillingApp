@@ -25,7 +25,7 @@ export function AddProductModal() {
     const [name, setName] = useState('');
     const [category, setCategory] = useState('');
     const [stock, setStock] = useState('');
-    const [expDate, setExpDate] = useState('');
+    const [price, setPrice] = useState('');
     const [provider, setProvider] = useState('');
 
     const { isAddProductModalOpen, CloseModal } = useUiStore();
@@ -42,8 +42,8 @@ export function AddProductModal() {
         setStock(e.target.value);
     }
 
-    function ExpirationDate(e) {
-        setExpDate(e.target.value);
+    function Price(e) {
+        setPrice(e.target.value);
     }
 
     function Provider(e) {
@@ -73,7 +73,7 @@ export function AddProductModal() {
                             htmlFor="Item"
                             className="form-label"
                         >
-                            Item
+                            Name
                         </label>
                         <input
                             type="text"
@@ -112,16 +112,16 @@ export function AddProductModal() {
                     </div>
                     <div className="mb-4">
                         <label
-                            htmlFor="ExpirationDate"
+                            htmlFor="Price"
                             className=" form-label"
                         >
-                            Expiration Date
+                            Price
                         </label>
                         <input
                             type="text"
                             className="form-control"
-                            id="ExpirationDate"
-                            onChange={ExpirationDate}
+                            id="Price"
+                            onChange={Price}
                         ></input>
                     </div>
                     <div className="mb-4">
@@ -161,7 +161,7 @@ export function UpdateProductModal() {
         title: "",
         category: "",
         stock: "",
-        expirationDate: "",
+        Price: "",
         provider: "",
     });
 
@@ -171,7 +171,7 @@ export function UpdateProductModal() {
                 title: product.title || "",
                 category: product.category || "",
                 stock: product.stock || "",
-                expirationDate: product.warrantyInformation || "",
+                Price: product.warrantyInformation || "",
                 provider: product.sku || "",
             });
         }
@@ -234,13 +234,13 @@ export function UpdateProductModal() {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="expirationDate" className="form-label">Expiration Date</label>
+                    <label htmlFor="Price" className="form-label">Expiration Date</label>
                     <input
                         type="text"
                         className="form-control"
-                        id="expirationDate"
-                        name="expirationDate"
-                        value={formValues.expirationDate}
+                        id="Price"
+                        name="Price"
+                        value={formValues.Price}
                         onChange={handleChange}
                     />
                 </div>

@@ -1,4 +1,5 @@
 export * from './ui/uiSlice'
 export * from './handlers/productHandlers'
 export * from './handlers/employeeHandlers'
+export * from './cashRegisterHandler/cashRegisterHandler'
 export * from './Store'

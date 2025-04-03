@@ -1,0 +1,27 @@
+.thisSale,.addCustomer{
+    color: aliceblue;
+}
+
+.addCustomer{
+    background: #ca6702;
+    color: #edf2f4;
+}
+
+.addCustomer:hover{
+    color: black; ;
+}
+
+.prods{
+    background-color: #0A9396;
+    width: 300px;
+    color: aliceblue;
+}
+
+.prods:hover{
+    background-color: #005F73;
+    color: aliceblue;
+}
+
+.nav-box{
+    background-color: #EE9B00;
+}

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { GetProducts } from "../../Requester";
 import "./Inventory.css"
-import {AddProductModal, DeletePrpductModal, UpdateProductModal} from "./Modals"
+import { AddProductModal, DeletePrpductModal, UpdateProductModal } from "./Modals"
 import { useUiStore, useUpdateProducts } from "../../Hooks";
 
 
 export function Inventory() {
   const [products, useProducts] = useState([]);
 
-  const {OpenModal}=useUiStore();
-  const {OpenUpdateModal} = useUiStore();
-  const {OpenDeleteModal} = useUiStore();
-  const {updateProduct} = useUpdateProducts();
+  const { OpenModal } = useUiStore();
+  const { OpenUpdateModal } = useUiStore();
+  const { OpenDeleteModal } = useUiStore();
+  const { updateProduct } = useUpdateProducts();
 
   const getProds = async () => {
     try {
@@ -22,16 +22,17 @@ export function Inventory() {
     }
   }
 
+  console.log(products)
   useEffect(() => {
     getProds();
   }, [])
 
   function UpdateProducts(product) {
     updateProduct(product);
-    OpenUpdateModal();    
+    OpenUpdateModal();
   }
 
-  function DeleteProducts(product){
+  function DeleteProducts(product) {
     updateProduct(product);
     OpenDeleteModal();
   }
@@ -46,35 +47,37 @@ export function Inventory() {
         <td scope="col">{product.stock}</td>
         <td scope="col">{product.warrantyInformation}</td>
         <td scope="col">{product.sku}</td>
-        <td><button className="btn" onClick={()=>UpdateProducts(product)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
-        <td><button className="btn" onClick={()=>DeleteProducts(product)}><i className=" fa-solid fa-trash"></i></button></td>
+        <td><button className="btn" onClick={() => UpdateProducts(product)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
+        <td><button className="btn" onClick={() => DeleteProducts(product)}><i className=" fa-solid fa-trash"></i></button></td>
       </tr>
     )
   })
 
   return (
-    <>  
-    <div className="btn i-button m-3" onClick={OpenModal}>Add Product</div>
-    <div className="btn i-button m-3" onClick={getProds}><i className="fa-solid fa-rotate-right"></i></div>
-      <table className="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Expiration date</th>
-            <th scope="col">Provider</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody className="table-group-divider">
+    <>
+      <div className="btn i-button m-3" onClick={OpenModal}>Add Product</div>
+      <div className="btn i-button m-3" onClick={getProds}><i className="fa-solid fa-rotate-right"></i></div>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Expiration date</th>
+              <th scope="col">Provider</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody className="table-group-divider">
 
             {HTMLproducts}
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
       <AddProductModal></AddProductModal>
       <UpdateProductModal></UpdateProductModal>
       <DeletePrpductModal></DeletePrpductModal>

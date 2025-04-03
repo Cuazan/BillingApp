@@ -41,3 +41,16 @@ export async function GetEmployees() {
         console.log(error)
     }
 }
+
+
+export async function GetProductsFiltered() {
+    try {
+        const response = await axiosInstance.get(
+            '/products'
+        );
+        return response.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}

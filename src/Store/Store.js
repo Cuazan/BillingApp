@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { updateProduct, uiSlice, deleteProduct } from "./";
-import { updateProductSlice } from "./";
-import { updateEmployeeSlice } from "./";
+import { updateEmployeeSlice, productsToSell, updateProductSlice } from "./";
 
 export const Store =configureStore({
     reducer: {
@@ -9,6 +8,7 @@ export const Store =configureStore({
         updateModal: updateProduct.reducer,
         deleteModal: deleteProduct.reducer,
         updateHandler: updateProductSlice.reducer,
-        updateEmployeeHandler: updateEmployeeSlice.reducer 
+        updateEmployeeHandler: updateEmployeeSlice.reducer, 
+        productHandler: productsToSell.reducer
     }
 })

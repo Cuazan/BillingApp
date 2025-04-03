@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const navigation = useNavigate();
-  const login = () =>{
-    navigation('/main', { replace:true});
+
+  const login = () => {
+    navigation('/main', { replace: true });
   }
+
   return (
     <>
       <div className="container vh-100 d-flex align-items-center justify-content-center">
         <div className="row  w-100">
           <div className="col d-flex justify-content-center ">
             <div className="card p-3">
-              <form className="m-3" onSubmit={login}>
+              <form className="m-3">
                 <div className="mb-4">
                   <label
                     htmlFor="inputUsername"
@@ -40,7 +42,10 @@ export function Login() {
                     id="inputPassword"
                   ></input>
                 </div>
-                <button type="submit" className="btn submit mt-2">
+                <button type="button" className="btn submit mt-2" onClick={login}>
+                  Submit
+                </button>
+                <button type="button" className="btn submit mt-2" >
                   Submit
                 </button>
               </form>

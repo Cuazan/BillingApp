@@ -13,7 +13,7 @@ export function Login() {
       <div className="container vh-100 d-flex align-items-center justify-content-center">
         <div className="row  w-100">
           <div className="col d-flex justify-content-center ">
-            <div className="card p-3">
+            <div className="card login p-3">
               <form className="m-3">
                 <div className="mb-4">
                   <label

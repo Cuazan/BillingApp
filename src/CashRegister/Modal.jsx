@@ -29,7 +29,7 @@ export function AddProductToSell() {
     const [products, useProducts] = useState([]);
     const [quantity, useQuantity] = useState(0);
     const [productToSave, useProductToSave] = useState({
-        title:"",
+        title: "",
         id: "",
         quantity: 0,
         pricePerUnit: "",
@@ -38,7 +38,7 @@ export function AddProductToSell() {
 
     const { isAddProductModalOpen, CloseModal } = useUiStore();
 
-    const {AddProduct} = useCashRegisterHandler();
+    const { AddProduct } = useCashRegisterHandler();
 
     const getProds = async () => {
         try {
@@ -53,22 +53,25 @@ export function AddProductToSell() {
         getProds();
     }, [])
 
-    useEffect(()=>{
-        AddProduct(productToSave);
-        console.log(productToSave);
-    },[productToSave])
-
-    function SetQuantity(e){
+    useEffect(() => {
+        if (productToSave.id && productToSave.quantity) {
+            AddProduct(productToSave);
+            console.log(productToSave);
+        }
+        useQuantity(0)
+    }, [productToSave])
+    
+    function SetQuantity(e) {
         useQuantity(e.target.value)
     }
 
-    function SaveAddProduct(product){
+    function SaveAddProduct(product) {
         useProductToSave({
             title: product.title,
             id: product.id,
             quantity: quantity,
             pricePerUnit: product.price,
-            subtotal: quantity*product.price
+            subtotal: quantity * product.price
         })
     }
 
@@ -86,7 +89,7 @@ export function AddProductToSell() {
                                     <span className="input-group-text">Quantity</span>
                                     <input type="number" className="form-control" onChange={SetQuantity}></input>
                                 </div>
-                                <a className="btn btn-primary mt-auto" onClick={()=>SaveAddProduct(product)}>Add</a>
+                                <a className="btn btn-primary mt-auto" onClick={() => SaveAddProduct(product)}>Add</a>
                             </div>
                         </div>
                     </div>

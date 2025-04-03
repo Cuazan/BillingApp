@@ -45,9 +45,6 @@ export function Login() {
                 <button type="button" className="btn submit mt-2" onClick={login}>
                   Submit
                 </button>
-                <button type="button" className="btn submit mt-2" >
-                  Submit
-                </button>
               </form>
             </div>
           </div>

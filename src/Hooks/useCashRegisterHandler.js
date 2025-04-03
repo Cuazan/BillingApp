@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addProd } from "../Store";
+import { addProd, removeProd } from "../Store";
 
 
 export const useCashRegisterHandler = () =>{
@@ -13,9 +13,14 @@ export const useCashRegisterHandler = () =>{
         dispatch(addProd(prod));
     }
 
+    const RemoveProduct = (prod) => {
+        dispatch(removeProd(prod));
+    }
+
     return{
         libraries,
 
-        AddProduct
+        AddProduct,
+        RemoveProduct
     }
 }

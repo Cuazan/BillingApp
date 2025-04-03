@@ -1,4 +1,3 @@
-import Modal from "react-modal";
 import { useState, useEffect } from "react";
 import { useUiStore } from "../Hooks";
 import { GetProductsFiltered } from "../Requester";
@@ -6,23 +5,7 @@ import "./Modal.css"
 import { useCashRegisterHandler } from "../Hooks/useCashRegisterHandler";
 
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        width: '90vw',
-        maxWidth: '1200px',
-        height: '80vh',
-        padding: '30px',
-        overflow: 'auto'
-    }
-};
 
-Modal.setAppElement('#root');
 
 export function AddProductToSell() {
 
@@ -60,7 +43,7 @@ export function AddProductToSell() {
         }
         useQuantity(0)
     }, [productToSave])
-    
+
     function SetQuantity(e) {
         useQuantity(e.target.value)
     }
@@ -76,7 +59,7 @@ export function AddProductToSell() {
     }
 
     const HTMLproducts = (
-        <div className="container">
+        <div className="container pt-0">
             <div className="row">
                 {products.map((product) => (
                     <div className="col-md-4 mb-3" key={product.id}>
@@ -101,18 +84,8 @@ export function AddProductToSell() {
     return (
         <>
 
-            <Modal
-                isOpen={isAddProductModalOpen}
-                onRequestClose={CloseModal}
-                style={customStyles}
-                closeTimeoutMS={200}
-            >
                 {HTMLproducts}
-                <div className="modal-footer">
-                    <button className="btn btn-danger" onClick={CloseModal}>Cerrar</button>
-                </div>
 
-            </Modal>
 
 
         </>

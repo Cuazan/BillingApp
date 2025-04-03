@@ -18,4 +18,8 @@
     overflow: hidden;
     max-width: 100%;
     padding: 15px;
+    height: 800px;
+    overflow-y: auto; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }

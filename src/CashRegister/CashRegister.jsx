@@ -1,5 +1,5 @@
 import './CashRegister.css';
-import { AddProductToSell } from './Modal';
+import { AddProductToSell } from './Inventory';
 import { useUiStore } from '../Hooks';
 import { useCashRegisterHandler } from '../Hooks/useCashRegisterHandler';
 import { useEffect, useState } from 'react';
@@ -10,7 +10,7 @@ export function CashRegister() {
     const [total, useTotal] = useState(0);
 
     const { OpenModal } = useUiStore();
-    const { libraries } = useCashRegisterHandler()
+    const { libraries, RemoveProduct } = useCashRegisterHandler()
 
     useEffect(() => {
         if (libraries) {
@@ -27,11 +27,18 @@ export function CashRegister() {
         }
     }, [libraries])
 
+    function ProductToRemove (product){
+        RemoveProduct(product);
+    }
+
 
     const HTMLproducts = receivedProduct.map((product) => {
         return (
             <div key={product.id} className="border-bottom p-3 item">
+                <div className="d-flex justify-content-between">                    
                 <h5>{product.title}</h5>
+                <span><button className="btn rounded-circle eliminateProd" onClick={()=> ProductToRemove(product.id)}><i class="fa-regular fa-circle-xmark"></i> </button></span>
+                </div>
                 <p>ID: {product.id}</p>
                 <div className="d-flex justify-content-between mr-5 p-0 m-0">
                     <h5>Qtt: {product.quantity}</h5>
@@ -59,10 +66,8 @@ export function CashRegister() {
 
             <div className="row mt-3">
                 <div className="col-12 col-lg-8 pt-3 ps-5">
-                    <button className="btn prods m-3" onClick={OpenModal}>Just Testing</button>
-                    <button className="btn prods m-3" >Just Testing</button>
-                    <button className="btn prods m-3" >Just Testing</button>
-                    <button className="btn prods m-3" >Just Testing</button>
+                    
+                <AddProductToSell></AddProductToSell>
                 </div>
                 <div className="thisSale col-12 col-lg-4 pt-3 pb-5 pe-5">
                     <div className="card showProducts rounded-top">
@@ -71,11 +76,10 @@ export function CashRegister() {
 
 
                     <div className="toPay p-3 ">
-                        <h5 className="mb-0">Total: ${total}</h5>
+                        <h5 className="mb-0">Total: ${total.toFixed(2)}</h5>
                     </div>
                 </div>
             </div>
-            <AddProductToSell></AddProductToSell>
         </div>
     )
 }

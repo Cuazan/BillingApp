@@ -8,8 +8,11 @@ export const productsToSell = createSlice({
     reducers: {
         addProd: (state, action) =>{
             state.libraries.push(action.payload);
+        },
+        removeProd: (state, action) => {
+            state.libraries = state.libraries.filter(prod => prod.id !== action.payload);
         }
     }
 })
 
-export const { addProd } = productsToSell.actions;
+export const { addProd, removeProd } = productsToSell.actions;

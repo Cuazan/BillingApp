@@ -26,7 +26,7 @@ export function Login() {
                     type="text"
                     className="form-control"
                     id="inputUsername"
-                    placeholder="Ex:Cuazan"
+                    placeholder="Ex:Dytox"
                   ></input>
                 </div>
                 <div className="mb-4">

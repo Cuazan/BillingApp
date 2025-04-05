@@ -92,7 +92,7 @@ export function UpdateProductModal() {
     useEffect(() => {
         if (product) {
             setFormValues({
-                name: product.name || "",
+                name: product.title || "",
                 category: product.category || "",
                 stock: product.stock || "",
                 price: product.price || "",

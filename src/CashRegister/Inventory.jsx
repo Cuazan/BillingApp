@@ -32,7 +32,6 @@ export function AddProductToSell() {
     useEffect(() => {
         if (productToSave.id && productToSave.quantity) {
             AddProduct(productToSave);
-            console.log(productToSave);
         }
         useQuantity(0);
     }, [productToSave]);

@@ -34,9 +34,9 @@
 
 .payButton:hover{
     
-  background: #2f855a; /* Verde natural */
-  color: #f0fff4; /* Blanco ligeramente teñido */
-  border-bottom: 1px solid #38a169; /* Detalle de profundidad */
+  background: #2f855a; 
+  color: #f0fff4; 
+  border-bottom: 1px solid #38a169; 
 }
 
 .prods:hover {
@@ -51,7 +51,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
 }
 
 .item {

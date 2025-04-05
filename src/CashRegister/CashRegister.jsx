@@ -4,11 +4,20 @@ import { useUiStore } from '../Hooks';
 import { useCashRegisterHandler } from '../Hooks/useCashRegisterHandler';
 import { useEffect, useState } from 'react';
 import { AddCustomerModal } from './AddCustomerModal';
+import { useNavigate } from 'react-router-dom';
 
 export function CashRegister() {
 
     const [receivedProduct, useReceivedProduct] = useState([])
     const [total, useTotal] = useState(0);
+    const [customerID, useCustomerID] = useState(0);
+    const navigation = useNavigate();
+
+    const Logut  = () =>{
+        navigation( '/', {replace : true})
+    }
+
+    console.log(customerID);
 
     const { OpenModal } = useUiStore();
     const { libraries, RemoveProduct } = useCashRegisterHandler()
@@ -17,8 +26,6 @@ export function CashRegister() {
         if (libraries) {
 
             useReceivedProduct(libraries);
-
-            console.log(libraries)
 
             let newTotal = 0;
             for (let i = 0; i < libraries.length; i++) {
@@ -61,7 +68,7 @@ export function CashRegister() {
                             </button>
                         </li>
                     </ul>
-                    <button className="btn" id="logout" >Logout <i className="fa-solid fa-right-from-bracket"></i> </button>
+                    <button className="btn" id="logout" onClick={Logut} >Logout <i className="fa-solid fa-right-from-bracket"></i> </button>
                 </div>
             </nav>
 
@@ -72,6 +79,10 @@ export function CashRegister() {
                 </div>
                 <div className="thisSale col-12 col-lg-4 pt-3 pb-5">
                     <div className="card showProducts rounded-top">
+                        <div className="input-group mb-2">
+                            <span className="input-group-text">Customer ID</span>
+                            <input type="number" className="form-control" onChange={(e) => useCustomerID(e.target.value)}></input>
+                        </div>
                         {HTMLproducts}
                     </div>
                     <div className="toPay p-3 ">

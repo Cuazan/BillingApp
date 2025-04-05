@@ -8,7 +8,7 @@
 }
 
 .nav-box {
-    background: #4a5568; /* Azul-gris neutro */
+    background: #4a5568;
     color: #f7fafc;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
@@ -22,7 +22,7 @@
 
 .addProd:hover{
     
-    background: #4a5568; /* Azul-gris neutro */
+    background: #4a5568; 
     color: #f7fafc;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }

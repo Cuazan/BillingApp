@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { GetProducts } from "../Requester";
-import "./Inventory.css";
 import { useCashRegisterHandler } from "../Hooks/useCashRegisterHandler";
 
 export function AddProductToSell() {
@@ -76,7 +75,7 @@ export function AddProductToSell() {
                     .map((product) => (
                         <div className="col-md-3 col-6 mb-3" key={product.id}>
                             <div className="card h-100 p-2">
-                                <img src={product.images} className="card-img-top" alt={product.title} />
+                                <img src={product.images} className="card-img-top border" alt={product.title} />
                                 <div className="card-body d-flex flex-column">
                                     <h5 className="card-title">{product.title}</h5>
                                     <p>${product.price}</p>
@@ -84,7 +83,7 @@ export function AddProductToSell() {
                                         <span className="input-group-text">Quantity</span>
                                         <input type="number" className="form-control" onChange={SetQuantity}></input>
                                     </div>
-                                    <a className="btn btn-primary mt-auto" onClick={() => SaveAddProduct(product)}>Add</a>
+                                    <a className="btn btn-primary mt-auto addProd" onClick={() => SaveAddProduct(product)}>Add</a>
                                 </div>
                             </div>
                         </div>

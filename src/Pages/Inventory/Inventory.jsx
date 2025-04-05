@@ -21,8 +21,7 @@ export function Inventory() {
       console.log(error)
     }
   }
-
-  console.log(products)
+  
   useEffect(() => {
     getProds();
   }, [])

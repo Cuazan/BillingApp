@@ -28,7 +28,7 @@ export function CashRegister() {
         }
     }, [libraries])
 
-    function ProductToRemove (product){
+    function ProductToRemove(product) {
         RemoveProduct(product);
     }
 
@@ -36,9 +36,9 @@ export function CashRegister() {
     const HTMLproducts = receivedProduct.map((product) => {
         return (
             <div key={product.id} className="border-bottom p-3 item">
-                <div className="d-flex justify-content-between">                    
-                <h5>{product.title}</h5>
-                <span><button className="btn rounded-circle eliminateProd" onClick={()=> ProductToRemove(product.id)}><i className="fa-regular fa-circle-xmark"></i> </button></span>
+                <div className="d-flex justify-content-between">
+                    <h5>{product.title}</h5>
+                    <span><button className="btn rounded-circle eliminateProd" onClick={() => ProductToRemove(product.id)}><i className="fa-regular fa-circle-xmark"></i> </button></span>
                 </div>
                 <p>ID: {product.id}</p>
                 <div className="d-flex justify-content-between mr-5 p-0 m-0">
@@ -51,7 +51,7 @@ export function CashRegister() {
     })
 
     return (
-        <div className="container-fluid p-0">
+        <div className="container-fluid pageBody p-0">
             <nav className="navbar navbar-expand-lg nav-box m-0">
                 <div className="container-fluid">
                     <ul className="navbar-nav">
@@ -67,17 +67,16 @@ export function CashRegister() {
 
             <div className="row mt-3">
                 <div className="col-12 col-lg-8 pt-3 ">
-                    
-                <AddProductToSell></AddProductToSell>
+
+                    <AddProductToSell></AddProductToSell>
                 </div>
                 <div className="thisSale col-12 col-lg-4 pt-3 pb-5">
                     <div className="card showProducts rounded-top">
                         {HTMLproducts}
                     </div>
-
-
                     <div className="toPay p-3 ">
                         <h5 className="mb-0">Total: ${total.toFixed(2)}</h5>
+                        <button className="payButton btn">Pay<span><i className="fa-solid fa-dollar-sign ms-3"></i></span></button>
                     </div>
                 </div>
             </div>

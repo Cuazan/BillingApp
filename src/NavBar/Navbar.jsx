@@ -3,9 +3,9 @@ import "./Navbar.css";
 
 export function NavBar() {
   const navigation = useNavigate();
-
-  const Logout = () => {
-    navigation('/', { replace: true })
+  
+  const Login = () =>{
+    navigation('/', {replace:true})
   }
 
 
@@ -20,12 +20,12 @@ export function NavBar() {
               </Link>
             </li>
             <li className="nav-item m-3">
-              <Link className="nav-link" to="employees">
+            <Link className="nav-link" to="employees">
                 Employees
               </Link>
             </li>
           </ul>
-          <button className="btn" id="logout" onClick={Logout}>Logout <i className="fa-solid fa-right-from-bracket"></i> </button>
+          <button className="btn" id="logout"  onClick={Login}>Logout <i className="fa-solid fa-right-from-bracket"></i> </button>
         </div>
       </nav>
     </>

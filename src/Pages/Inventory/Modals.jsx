@@ -24,14 +24,14 @@ export function AddProductModal() {
     const [category, setCategory] = useState('');
     const [stock, setStock] = useState('');
     const [price, setPrice] = useState('');
-    const [provider, setProvider] = useState('');
+    const [provider, setProvider] = useState('');    
+    const [id, setID] = useState('');
 
     const { isAddProductModalOpen, CloseModal } = useUiStore();
 
     function PostElement(e) {
         e.preventDefault();
-        if (!name || !category || !stock || !price || !provider) return;
-        PostItem({ name, category, stock, price, provider });
+        PostItem({ id, name, category, stock, price, provider });
         console.log('Product added');
         CloseModal();
     }
@@ -47,6 +47,10 @@ export function AddProductModal() {
                 <h2>Add Product</h2>
                 <hr></hr>
                 <form className="m-3" onSubmit={PostElement}>
+                <div className="mb-4">
+                        <label htmlFor="name" className="form-label">ID</label>
+                        <input type="text" className="form-control" id="name" onChange={(e) => setID(e.target.value)} required />
+                    </div>
                     <div className="mb-4">
                         <label htmlFor="name" className="form-label">Product Name</label>
                         <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
@@ -92,11 +96,11 @@ export function UpdateProductModal() {
     useEffect(() => {
         if (product) {
             setFormValues({
-                name: product.title || "",
-                category: product.category || "",
+                name: product.name || "",
+                category: product.categoryId || "",
                 stock: product.stock || "",
                 price: product.price || "",
-                provider: product.provider || "",
+                provider: product.providerId || "",
             });
         }
     }, [product]);

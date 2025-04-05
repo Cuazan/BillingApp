@@ -90,12 +90,13 @@ export function UpdateEmployeeModal() {
 
     useEffect(() => {
         if (employee) {
+            console.log(employee);
             setFormValues({
-                firstName: employee.firstName || "",
+                firstName: employee.name || "",
                 email: employee.email || "",
                 address: employee.address || "",
                 phone: employee.phone || "",
-                role: employee.role || "",
+                role: employee.roleId || "",
             });
         }
     }, [employee]);
@@ -133,7 +134,7 @@ export function UpdateEmployeeModal() {
                 </div>
                 <div className="mb-4">
                     <label htmlFor="address" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="address" name="address" value={formValues.address.country} onChange={handleChange} required />
+                    <input type="text" className="form-control" id="address" name="address" value={formValues.address} onChange={handleChange} required />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="phone" className="form-label">Phone</label>

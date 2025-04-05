@@ -15,7 +15,7 @@ export function Employees() {
   const getEmployees = async () => {
     try {
       const response = await GetEmployees();
-      useEmployees(response.users)
+      useEmployees(response)
     } catch (error) {
       console.log(error)
     }
@@ -41,11 +41,11 @@ export function Employees() {
     return (
       <tr key={employee.id}>
         <td scope="col">{employee.id}</td>
-        <td scope="col">{employee.firstName}</td>
-        <td scope="col">{employee.age}</td>
+        <td scope="col">{employee.name}</td>
+        <td scope="col">{employee.email}</td>
+        <td scope="col">{employee.address}</td>
         <td scope="col">{employee.phone}</td>
-        <td scope="col">{employee.username}</td>
-        <td scope="col">{employee.address.country}</td>
+        <td scope="col">{employee.roleId}</td>
         <td><button className="btn" onClick={() => UpdateEmployees(employee)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
         <td><button className="btn" onClick={() => DeleteEmployee(employee)}><i className=" fa-solid fa-trash"></i></button></td>
       </tr>

@@ -21,7 +21,7 @@ export function AddProductToSell() {
         const getProds = async () => {
             try {
                 const response = await GetProducts();
-                useProducts(response.products);
+                useProducts(response);
             } catch (error) {
                 console.log(error);
             }
@@ -42,7 +42,7 @@ export function AddProductToSell() {
 
     function SaveAddProduct(product) {
         useProductToSave({
-            title: product.title,
+            title: product.name,
             id: product.id,
             quantity: quantity,
             pricePerUnit: product.price,
@@ -58,7 +58,7 @@ export function AddProductToSell() {
         <div className="container pt-0">
             <div className="mb-3">
                 <input
-                    type="number"
+                    type="text"
                     className="form-control"
                     placeholder="Search by code"
                     value={searchTerm}
@@ -76,7 +76,7 @@ export function AddProductToSell() {
                             <div className="card h-100 p-2">
                                 <img src={product.images} className="card-img-top border" alt={product.title} />
                                 <div className="card-body d-flex flex-column">
-                                    <h5 className="card-title">{product.title}</h5>
+                                    <h5 className="card-title">{product.name}</h5>
                                     <p>${product.price}</p>
                                     <div className="input-group mb-2">
                                         <span className="input-group-text">Quantity</span>

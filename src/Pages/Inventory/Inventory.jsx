@@ -16,7 +16,7 @@ export function Inventory() {
   const getProds = async () => {
     try {
       const response = await GetProducts();
-      useProducts(response.products)
+      useProducts(response)
     } catch (error) {
       console.log(error)
     }
@@ -41,11 +41,11 @@ export function Inventory() {
     return (
       <tr key={product.id}>
         <td scope="col">{product.id}</td>
-        <td scope="col">{product.title}</td>
-        <td scope="col">{product.category}</td>
+        <td scope="col">{product.name}</td>
+        <td scope="col">{product.categoryId}</td>
         <td scope="col">{product.stock}</td>
-        <td scope="col">{product.warrantyInformation}</td>
-        <td scope="col">{product.sku}</td>
+        <td scope="col">${product.price}</td>
+        <td scope="col">{product.providerId}</td>
         <td><button className="btn" onClick={() => UpdateProducts(product)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
         <td><button className="btn" onClick={() => DeleteProducts(product)}><i className=" fa-solid fa-trash"></i></button></td>
       </tr>

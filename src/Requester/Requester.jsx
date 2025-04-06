@@ -2,7 +2,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
     baseURL: 'https://recursosbackend-gagdguh4a2aehrfs.canadacentral-01.azurewebsites.net',
-    timeout: 1000
+    timeout: 5000
 });
 
 export async function GetProducts() {
@@ -17,22 +17,23 @@ export async function GetProducts() {
     }
 }
 
-export async function PostItem({id, name, category, stock, price, provider}) {
+export async function PostItem({ id, name, category, stock, price, provider }) {
     try {
-        axiosInstance.post('/api/Products',{
+        const response = await axiosInstance.post('/api/Products', {
             id: id,
-            name: name,
+            name:name,
             categoryId: category,
-            stock: stock,
+            stock:stock,
             price: price,
             providerId: provider
-        } ).then(response => {
-            console.log(response.data);
-        })
+        });
+        console.log(id, name);
+        console.log(response.data);
     } catch (error) {
-        console.error(error);
+        console.error('Error al hacer POST:', error);
     }
 }
+
 
 export async function GetEmployees() {
     try {

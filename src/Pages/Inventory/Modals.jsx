@@ -27,6 +27,7 @@ export function AddProductModal() {
     const [stock, setStock] = useState('');
     const [price, setPrice] = useState('');
     const [provider, setProvider] = useState('');
+    const [img, setImg] = useState('');
     const [id, setID] = useState('');
 
     const [categories, setCategories] = useState([]);
@@ -54,7 +55,7 @@ export function AddProductModal() {
 
     function PostElement(e) {
         e.preventDefault();
-        PostItem({ id, name, category, stock, price, provider });
+        PostItem({ id, name, category, stock, price, provider, img });
         CloseModal();
     }
 
@@ -71,6 +72,10 @@ export function AddProductModal() {
                 <div className="mb-4">
                     <label htmlFor="id" className="form-label">ID</label>
                     <input type="text" className="form-control" id="id" onChange={(e) => setID(e.target.value)} required />
+                </div>               
+                 <div className="mb-4">
+                    <label htmlFor="id" className="form-label">Image</label>
+                    <input type="text" className="form-control" id="id" onChange={(e) => setImg(e.target.value)} required />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="name" className="form-label">Product Name</label>
@@ -121,6 +126,7 @@ export function UpdateProductModal() {
 
     const [formValues, setFormValues] = useState({
         name: "",
+        img: "",
         category: "",
         stock: "",
         price: "",
@@ -150,6 +156,7 @@ export function UpdateProductModal() {
         if (product) {
             setFormValues({
                 name: product.name || "",
+                img: product.imageUrl || "",
                 category: product.categoryName || "",
                 stock: product.stock || "",
                 price: product.price || "",
@@ -167,7 +174,7 @@ export function UpdateProductModal() {
     }
 
     function UpdateElement(e) {
-        e.preventDefault();        
+        e.preventDefault();
         UpdateItem(product.id, formValues)
         CloseUpdateModalOpen();
     }
@@ -185,6 +192,10 @@ export function UpdateProductModal() {
                 <div className="mb-4">
                     <label htmlFor="name" className="form-label">Product Name</label>
                     <input type="text" className="form-control" id="name" name="name" value={formValues.name} onChange={handleChange} required />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="img" className="form-label">Product image</label>
+                    <input type="text" className="form-control" id="img" name="img" value={formValues.img} onChange={handleChange} required />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="category" className="form-label">Category</label>

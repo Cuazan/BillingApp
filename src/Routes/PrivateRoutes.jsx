@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Layout, Inventory, Employees, Customers } from "../Pages"
+import { Layout, Inventory, Employees, Customers, Sales } from "../Pages"
 
 export function PrivateRoutes() {
     return (
@@ -8,6 +8,7 @@ export function PrivateRoutes() {
                 <Route path="inventory" element={<Inventory />} />
                 <Route path="employees" element={<Employees />} />
                 <Route path="customers" element={<Customers/>} />
+                <Route path="sales" element={<Sales/>}/>
             </Route>
         </Routes>
     )

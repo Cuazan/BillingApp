@@ -38,22 +38,23 @@ export async function GetProviders() {
     }
 }
 
-export async function PostItem({ id, name, category, address, phone, provider }) {
+export async function PostItem({ id, name, category, stock, price, provider, img }) {
     try {
         const response = await axiosInstance.post('/api/Products', {
             id: id,
             name:name,
             categoryId: category,
-            address:address,
-            phone: phone,
-            providerId: provider
+            stock: stock,
+            price: price,
+            providerId: provider,
+            images:img
         });
+        console.log(response.data);
         alert("Succeed! Please refresh the page.");
     } catch (error) {
         console.error('Error al hacer POST:', error);
     }
 }
-
 
 export async function UpdateItem(id, updatedData) {
     try {
@@ -63,7 +64,8 @@ export async function UpdateItem(id, updatedData) {
             categoryId: updatedData.category,
             stock: updatedData.stock,
             price: updatedData.price,
-            providerId: updatedData.provider
+            providerId: updatedData.provider,
+            images: updatedData.img
         });
         alert("Succeed! Please refresh the page.");
         return response.data;
@@ -103,7 +105,7 @@ export async function PostEmployee({ id, name, email, address, phone, role }) {
             email: email,
             address: address,
             phone: phone,
-            roleName: role
+            roleId: role
         });
         alert("Succeed! Please refresh the page.");
     } catch (error) {
@@ -181,6 +183,30 @@ export async function DeleteCustomer(id) {
         const response = await axiosInstance.delete(`api/Customers/${id}`);
         alert("Succeed! Please refresh the page.");
         return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function GetSales() {
+    try {
+        const response = await axiosInstance.get(
+            '/api/Sales'
+        );
+        return response.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function PostSale({ customerId, amountPaid }) {
+    try {
+        const response = await axiosInstance.post('/api/Sales', {
+            customerId: customerId,
+            amountPaid: amountPaid
+        });
+        alert("Succeed! Please refresh the page.");
     } catch (error) {
         console.error(error);
     }

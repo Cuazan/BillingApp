@@ -41,6 +41,7 @@ export function Inventory() {
     return (
       <tr key={product.id}>
         <td scope="col">{product.id}</td>
+        <td scope="col"> <img src={product.imageUrl} className="img"></img></td>
         <td scope="col">{product.name}</td>
         <td scope="col">{product.categoryName}</td>
         <td scope="col">{product.stock}</td>
@@ -61,6 +62,7 @@ export function Inventory() {
           <thead>
             <tr>
               <th scope="col">ID</th>
+              <th></th>
               <th scope="col">Name</th>
               <th scope="col">Category</th>
               <th scope="col">Stock</th>

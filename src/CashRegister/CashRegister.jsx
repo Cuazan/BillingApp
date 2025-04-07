@@ -5,7 +5,7 @@ import { useCashRegisterHandler } from '../Hooks/useCashRegisterHandler';
 import { useEffect, useState } from 'react';
 import { AddCustomerModal } from './AddCustomerModal';
 import { useNavigate } from 'react-router-dom';
-import { GetCustomers } from '../Requester';
+import { GetCustomers, PostSale } from '../Requester';
 import { Email } from './Email/Email';
 
 export function CashRegister() {
@@ -13,6 +13,10 @@ export function CashRegister() {
     const [receivedProduct, useReceivedProduct] = useState([])
     const [total, useTotal] = useState(0);
     const [selectedCustomer, setSelectedCustomer] = useState("");
+
+    const date = new Date();
+
+    console.log(date.toLocaleDateString());
 
     const navigation = useNavigate();
 
@@ -57,7 +61,8 @@ export function CashRegister() {
         RemoveProduct(product);
     }
 
-    function sendEmail(){
+    function postSale(){
+        PostSale(selectedCustomer, total);
         Email(selectedCustomer , {libraries});      
     }
 
@@ -117,7 +122,7 @@ export function CashRegister() {
                     </div>
                     <div className="toPay p-3 ">
                         <h5 className="mb-0">Total: ${total.toFixed(2)}</h5>
-                        <button className="payButton btn" onClick={sendEmail}>Pay<span><i className="fa-solid fa-dollar-sign ms-3"></i></span></button>
+                        <button className="payButton btn" onClick={postSale}>Pay<span><i className="fa-solid fa-dollar-sign ms-3"></i></span></button>
                     </div>
                 </div>
             </div>

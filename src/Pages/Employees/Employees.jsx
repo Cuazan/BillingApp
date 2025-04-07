@@ -12,6 +12,7 @@ export function Employees() {
   const { OpenDeleteModal } = useUiStore();
   const { UpdateEmployee } = useUpdateEmployee();
 
+
   const getEmployees = async () => {
     try {
       const response = await GetEmployees();
@@ -44,7 +45,7 @@ export function Employees() {
         <td scope="col">{employee.email}</td>
         <td scope="col">{employee.address}</td>
         <td scope="col">{employee.phone}</td>
-        <td scope="col">{employee.roleId}</td>
+        <td scope="col">{employee.roleName  }</td>
         <td><button className="btn" onClick={() => UpdateEmployees(employee)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
         <td><button className="btn" onClick={() => DeleteEmployee(employee)}><i className=" fa-solid fa-trash"></i></button></td>
       </tr>

@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import "./Modal.css"
 import { useUiStore, useUpdateEmployee } from "../../Hooks";
-import { DeleteEmployee, PostEmployee, PostItem, UpdateEmployee } from '../../Requester'
+import { DeleteEmployee, PostEmployee, UpdateEmployee, GetRoles } from '../../Requester'
 import { useState, useEffect } from "react";
 
 const customStyles = {
@@ -20,20 +20,34 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export function AddEmployeeModal() {
-    const [id , setID] = useState('');
+    const [id, setID] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [role, setRole] = useState('');
+    const [roles, setRoles] = useState([]);
 
     const { isAddProductModalOpen, CloseModal } = useUiStore();
 
     function PostElement(e) {
         e.preventDefault();
-        PostEmployee({id, name, email, address, phone, role});
+        PostEmployee({ id, name, email, address, phone, role });
         CloseModal();
     }
+
+    async function getRoles() {
+        try {
+            const response = await GetRoles();
+            setRoles(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getRoles();
+    }, [isAddProductModalOpen])
 
     return (
         <>
@@ -46,7 +60,7 @@ export function AddEmployeeModal() {
                 <h2>Add Employee</h2>
                 <hr></hr>
                 <form className="m-3" onSubmit={PostElement}>
-                <div className="mb-4">
+                    <div className="mb-4">
                         <label htmlFor="ID" className="form-label">ID</label>
                         <input type="text" className="form-control" id="ID" onChange={(e) => setID(e.target.value)} required />
                     </div>
@@ -66,9 +80,24 @@ export function AddEmployeeModal() {
                         <label htmlFor="phone" className="form-label">Phone</label>
                         <input type="tel" className="form-control" id="phone" onChange={(e) => setPhone(e.target.value)} required />
                     </div>
-                    <div className="mb-4">
+                    <div className="mb-4"><div className="mb-4">
                         <label htmlFor="role" className="form-label">Role</label>
-                        <input type="text" className="form-control" id="role" onChange={(e) => setRole(e.target.value)} required />
+                        <select
+                            className="form-select"
+                            id="role"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                            required
+                        >
+                            <option value="" disabled>Select a role</option>
+                            {roles.map((r) => (
+                                <option key={r.id} value={r.id}>
+                                    {r.roleName}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
                     </div>
                     <div className="d-flex justify-content-between">
                         <button type="button" className="btn btn-danger mt-2" onClick={CloseModal}>Cancel</button>
@@ -82,8 +111,9 @@ export function AddEmployeeModal() {
 
 export function UpdateEmployeeModal() {
     const { isUpdateProductModalOpen, CloseUpdateModalOpen } = useUiStore();
-    const { employee } = useUpdateEmployee(); 
-    
+    const { employee } = useUpdateEmployee();
+    const [roles, setRoles] = useState([]);
+
     const [formValues, setFormValues] = useState({
         name: "",
         email: "",
@@ -99,7 +129,7 @@ export function UpdateEmployeeModal() {
                 email: employee.email || "",
                 address: employee.address || "",
                 phone: employee.phone || "",
-                role: employee.roleId || "",
+                role: employee.roleName || "",
             });
         }
     }, [employee]);
@@ -113,10 +143,24 @@ export function UpdateEmployeeModal() {
     }
 
     function UpdateElement(e) {
+        console.log(formValues);
         UpdateEmployee(employee.id, formValues);
         e.preventDefault();
         CloseUpdateModalOpen();
     }
+
+    async function getRoles() {
+        try {
+            const response = await GetRoles();
+            setRoles(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getRoles();
+    }, [isUpdateProductModalOpen])
 
     return (
         <Modal
@@ -146,7 +190,21 @@ export function UpdateEmployeeModal() {
                 </div>
                 <div className="mb-4">
                     <label htmlFor="role" className="form-label">Role</label>
-                    <input type="text" className="form-control" id="role" name="role" value={formValues.role} onChange={handleChange} required />
+                    <select
+                        className="form-select"
+                        id="role"
+                        name="role"
+                        value={formValues.role}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Select a role</option>
+                        {roles.map((r) => (
+                            <option key={r.id} value={r.id}>
+                                {r.roleName}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="d-flex justify-content-between">
                     <button type="button" className="btn btn-danger mt-2" onClick={CloseUpdateModalOpen}>Cancel</button>
@@ -160,9 +218,9 @@ export function UpdateEmployeeModal() {
 
 export function DeleteEmployeeModal() {
     const { isDeleteProductModalOpen, CloseDeleteModalOpen } = useUiStore();
-    const{ employee } = useUpdateEmployee();
+    const { employee } = useUpdateEmployee();
 
-    const employeeID =  employee.id;
+    const employeeID = employee.id;
 
     function Delete() {
         DeleteEmployee(employeeID);

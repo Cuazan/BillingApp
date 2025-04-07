@@ -103,7 +103,7 @@ export async function PostEmployee({ id, name, email, address, phone, role }) {
             email: email,
             address: address,
             phone: phone,
-            roleId: role
+            roleName: role
         });
         alert("Succeed! Please refresh the page.");
     } catch (error) {
@@ -119,7 +119,7 @@ export async function UpdateEmployee(id, updatedData) {
             email: updatedData.email,
             address: updatedData.address,
             phone: updatedData.phone,
-            roleId: updatedData.role
+            roleId: updatedData.role,
         });
         alert("Succeed! Please refresh the page.");
         return response.data;
@@ -156,6 +156,18 @@ export async function GetCustomers() {
     try {
         const response = await axiosInstance.get(
             '/api/Customers'
+        );
+        return response.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export async function GetRoles() {
+    try {
+        const response = await axiosInstance.get(
+            '/api/Roles'
         );
         return response.data
 

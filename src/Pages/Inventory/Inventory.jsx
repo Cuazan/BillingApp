@@ -42,10 +42,10 @@ export function Inventory() {
       <tr key={product.id}>
         <td scope="col">{product.id}</td>
         <td scope="col">{product.name}</td>
-        <td scope="col">{product.categoryId}</td>
+        <td scope="col">{product.categoryName}</td>
         <td scope="col">{product.stock}</td>
         <td scope="col">${product.price}</td>
-        <td scope="col">{product.providerId}</td>
+        <td scope="col">{product.providerName}</td>
         <td><button className="btn" onClick={() => UpdateProducts(product)}><i className=" fa-solid fa-pen-to-square"></i></button></td>
         <td><button className="btn" onClick={() => DeleteProducts(product)}><i className=" fa-solid fa-trash"></i></button></td>
       </tr>

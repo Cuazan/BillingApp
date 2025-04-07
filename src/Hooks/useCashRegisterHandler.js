@@ -19,6 +19,6 @@ export const useCashRegisterHandler = () =>{
         libraries,
 
         AddProduct,
-        RemoveProduct
+        RemoveProduct,
     }
 }

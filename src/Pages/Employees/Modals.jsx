@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import "./Modal.css"
 import { useUiStore, useUpdateEmployee } from "../../Hooks";
-import { PostItem } from '../../Requester'
+import { DeleteEmployee, PostEmployee, PostItem, UpdateEmployee } from '../../Requester'
 import { useState, useEffect } from "react";
 
 const customStyles = {
@@ -20,7 +20,8 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 export function AddEmployeeModal() {
-    const [firstName, setFirstName] = useState('');
+    const [id , setID] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
@@ -30,8 +31,7 @@ export function AddEmployeeModal() {
 
     function PostElement(e) {
         e.preventDefault();
-        if (!firstName || !email || !address || !phone || !role) return;
-        PostItem({ firstName, email, address, phone, role });
+        PostEmployee({id, name, email, address, phone, role});
         CloseModal();
     }
 
@@ -46,9 +46,13 @@ export function AddEmployeeModal() {
                 <h2>Add Employee</h2>
                 <hr></hr>
                 <form className="m-3" onSubmit={PostElement}>
+                <div className="mb-4">
+                        <label htmlFor="ID" className="form-label">ID</label>
+                        <input type="text" className="form-control" id="ID" onChange={(e) => setID(e.target.value)} required />
+                    </div>
                     <div className="mb-4">
-                        <label htmlFor="firstName" className="form-label">Employee Name</label>
-                        <input type="text" className="form-control" id="firstName" onChange={(e) => setFirstName(e.target.value)} required />
+                        <label htmlFor="name" className="form-label">Employee Name</label>
+                        <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
                     </div>
                     <div className="mb-4">
                         <label htmlFor="email" className="form-label">Email</label>
@@ -81,7 +85,7 @@ export function UpdateEmployeeModal() {
     const { employee } = useUpdateEmployee(); 
     
     const [formValues, setFormValues] = useState({
-        firstName: "",
+        name: "",
         email: "",
         address: "",
         phone: "",
@@ -90,9 +94,8 @@ export function UpdateEmployeeModal() {
 
     useEffect(() => {
         if (employee) {
-            console.log(employee);
             setFormValues({
-                firstName: employee.name || "",
+                name: employee.name || "",
                 email: employee.email || "",
                 address: employee.address || "",
                 phone: employee.phone || "",
@@ -110,6 +113,7 @@ export function UpdateEmployeeModal() {
     }
 
     function UpdateElement(e) {
+        UpdateEmployee(employee.id, formValues);
         e.preventDefault();
         CloseUpdateModalOpen();
     }
@@ -125,8 +129,8 @@ export function UpdateEmployeeModal() {
             <hr />
             <form className="m-3" onSubmit={UpdateElement}>
                 <div className="mb-4">
-                    <label htmlFor="firstName" className="form-label">Employee Name</label>
-                    <input type="text" className="form-control" id="firstName" name="firstName" value={formValues.firstName} onChange={handleChange} required />
+                    <label htmlFor="name" className="form-label">Employee Name</label>
+                    <input type="text" className="form-control" id="name" name="name" value={formValues.name} onChange={handleChange} required />
                 </div>
                 <div className="mb-4">
                     <label htmlFor="email" className="form-label">Email</label>
@@ -159,9 +163,9 @@ export function DeleteEmployeeModal() {
     const{ employee } = useUpdateEmployee();
 
     const employeeID =  employee.id;
-    console.log(employee);
+
     function Delete() {
-        console.log(employeeID)
+        DeleteEmployee(employeeID);
         CloseDeleteModalOpen();
     }
 
@@ -176,7 +180,7 @@ export function DeleteEmployeeModal() {
                 <h2>Delete Item</h2>
                 <hr></hr>
                 <form className="m-3">
-                    <h5>Are you sure you wish to delete {employee.firstName}?</h5>
+                    <h5>Are you sure you wish to delete {employee.name}?</h5>
                     <div className="d-flex justify-content-between mt-3">
                         <button type="button" className="btn btn-danger mt-2" onClick={CloseDeleteModalOpen}>
                             Cancel

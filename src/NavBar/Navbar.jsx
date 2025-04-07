@@ -24,6 +24,11 @@ export function NavBar() {
                 Employees
               </Link>
             </li>
+            <li className="nav-item m-3">
+            <Link className="nav-link" to="customers">
+                Customers
+              </Link>
+            </li>
           </ul>
           <button className="btn" id="logout"  onClick={Login}>Logout <i className="fa-solid fa-right-from-bracket"></i> </button>
         </div>

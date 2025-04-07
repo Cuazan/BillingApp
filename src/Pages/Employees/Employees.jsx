@@ -31,7 +31,6 @@ export function Employees() {
   }
 
   function DeleteEmployee(employee) {
-    console.log(employee)
     UpdateEmployee(employee);
     OpenDeleteModal();
   }

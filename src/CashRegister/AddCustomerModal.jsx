@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 import { useUiStore } from "../Hooks";
-import { PostItem } from "../Requester";
+import { PostCustomer, PostItem } from "../Requester";
 import { useState } from "react";
 
 const customStyles = {
@@ -28,8 +28,7 @@ export function AddCustomerModal() {
 
     function PostElement(e) {
         e.preventDefault();
-
-        PostItem({ name, id, email, phone });
+        PostCustomer({id, name, email, phone})
         CloseModal();
     }
 

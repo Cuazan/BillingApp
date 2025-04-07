@@ -5,22 +5,40 @@ import { useCashRegisterHandler } from '../Hooks/useCashRegisterHandler';
 import { useEffect, useState } from 'react';
 import { AddCustomerModal } from './AddCustomerModal';
 import { useNavigate } from 'react-router-dom';
+import { GetCustomers } from '../Requester';
+import { Email } from './Email/Email';
 
 export function CashRegister() {
 
     const [receivedProduct, useReceivedProduct] = useState([])
     const [total, useTotal] = useState(0);
-    const [customerID, useCustomerID] = useState(0);
+    const [selectedCustomer, setSelectedCustomer] = useState("");
+
     const navigation = useNavigate();
-
-    const Logut  = () =>{
-        navigation( '/', {replace : true})
-    }
-
-    console.log(customerID);
 
     const { OpenModal } = useUiStore();
     const { libraries, RemoveProduct } = useCashRegisterHandler()
+
+
+    const [customers, setCustomers] = useState([]);
+
+    const getCustomers = async () => {
+        try {
+            const response = await GetCustomers();
+            setCustomers(response)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        getCustomers();
+    }, [])
+
+
+    const Logut = () => {
+        navigation('/', { replace: true })
+    }
 
     useEffect(() => {
         if (libraries) {
@@ -37,6 +55,10 @@ export function CashRegister() {
 
     function ProductToRemove(product) {
         RemoveProduct(product);
+    }
+
+    function sendEmail(){
+        Email(selectedCustomer , {libraries});      
     }
 
 
@@ -81,13 +103,21 @@ export function CashRegister() {
                     <div className="card showProducts rounded-top">
                         <div className="input-group mb-2">
                             <span className="input-group-text">Customer ID</span>
-                            <input type="number" className="form-control" onChange={(e) => useCustomerID(e.target.value)}></input>
+                            <select className="form-control" onChange={(e) => setSelectedCustomer(e.target.value)}>
+                                <option value="">Select Customer ID</option>
+                                {customers.map((customer) => (
+                                    <option key={customer.id} value={customer.email}>
+                                        {customer.id} - {customer.name}
+                                    </option>
+                                ))}
+                            </select>
+
                         </div>
                         {HTMLproducts}
                     </div>
                     <div className="toPay p-3 ">
                         <h5 className="mb-0">Total: ${total.toFixed(2)}</h5>
-                        <button className="payButton btn">Pay<span><i className="fa-solid fa-dollar-sign ms-3"></i></span></button>
+                        <button className="payButton btn" onClick={sendEmail}>Pay<span><i className="fa-solid fa-dollar-sign ms-3"></i></span></button>
                     </div>
                 </div>
             </div>

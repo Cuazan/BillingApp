@@ -1,8 +1,10 @@
 import Modal from "react-modal";
-import "./Modal.css"
-import { useUiStore, useUpdateProducts } from "../../Hooks";
-import { PostItem } from '../../Requester'
+import "./Modal.css";
+import { useUiStore } from "../../Hooks";
+import { DeleteItem, GetCategories, GetProviders, PostItem, UpdateItem } from '../../Requester';
 import { useState, useEffect } from "react";
+import { useUpdateProducts } from "../../Hooks";
+import { updateProduct } from "../../Store";
 
 const customStyles = {
     content: {
@@ -24,66 +26,98 @@ export function AddProductModal() {
     const [category, setCategory] = useState('');
     const [stock, setStock] = useState('');
     const [price, setPrice] = useState('');
-    const [provider, setProvider] = useState('');    
+    const [provider, setProvider] = useState('');
     const [id, setID] = useState('');
 
+    const [categories, setCategories] = useState([]);
+    const [providers, setProviders] = useState([]);
+
     const { isAddProductModalOpen, CloseModal } = useUiStore();
+
+    const getCatProd = async () => {
+        try {
+            const categoryresponse = await GetCategories();
+            const providerResponse = await GetProviders();
+
+            setCategories(categoryresponse);
+            setProviders(providerResponse);
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    useEffect(() => {
+        getCatProd();
+
+    }, [isAddProductModalOpen]);
 
     function PostElement(e) {
         e.preventDefault();
         PostItem({ id, name, category, stock, price, provider });
-        console.log('Product added');
         CloseModal();
     }
 
     return (
-        <>
-            <Modal
-                isOpen={isAddProductModalOpen}
-                onRequestClose={CloseModal}
-                style={customStyles}
-                closeTimeoutMS={200}
-            >
-                <h2>Add Product</h2>
-                <hr></hr>
-                <form className="m-3" onSubmit={PostElement}>
+        <Modal
+            isOpen={isAddProductModalOpen}
+            onRequestClose={CloseModal}
+            style={customStyles}
+            closeTimeoutMS={200}
+        >
+            <h2>Add Product</h2>
+            <hr />
+            <form className="m-3" onSubmit={PostElement}>
                 <div className="mb-4">
-                        <label htmlFor="name" className="form-label">ID</label>
-                        <input type="text" className="form-control" id="name" onChange={(e) => setID(e.target.value)} required />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="form-label">Product Name</label>
-                        <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="category" className="form-label">Category</label>
-                        <input type="text" className="form-control" id="category" onChange={(e) => setCategory(e.target.value)} required />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="stock" className="form-label">Stock</label>
-                        <input type="text" className="form-control" id="stock" onChange={(e) => setStock(e.target.value)} required />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="price" className="form-label">Price</label>
-                        <input type="text" className="form-control" id="price" onChange={(e) => setPrice(e.target.value)} required />
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="provider" className="form-label">Provider</label>
-                        <input type="text" className="form-control" id="provider" onChange={(e) => setProvider(e.target.value)} required />
-                    </div>
-                    <div className="d-flex justify-content-between">
-                        <button type="button" className="btn btn-danger mt-2" onClick={CloseModal}>Cancel</button>
-                        <button type="submit" className="btn btn-primary mt-2">Accept</button>
-                    </div>
-                </form>
-            </Modal>
-        </>
+                    <label htmlFor="id" className="form-label">ID</label>
+                    <input type="text" className="form-control" id="id" onChange={(e) => setID(e.target.value)} required />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="name" className="form-label">Product Name</label>
+                    <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} required />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="category" className="form-label">Category</label>
+                    <select className="form-control" id="category" onChange={(e) => setCategory(e.target.value)} required>
+                        <option value="">Select a category</option>
+                        {categories.map(cat => (
+                            <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="stock" className="form-label">Stock</label>
+                    <input type="text" className="form-control" id="stock" onChange={(e) => setStock(e.target.value)} required />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="price" className="form-label">Price</label>
+                    <input type="text" className="form-control" id="price" onChange={(e) => setPrice(e.target.value)} required />
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="provider" className="form-label">Provider</label>
+                    <select className="form-control" id="provider" onChange={(e) => setProvider(e.target.value)} required>
+                        <option value="">Select a provider</option>
+                        {providers.map(prov => (
+                            <option key={prov.id} value={prov.id}>{prov.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="d-flex justify-content-between">
+                    <button type="button" className="btn btn-danger mt-2" onClick={CloseModal}>Cancel</button>
+                    <button type="submit" className="btn btn-primary mt-2">Accept</button>
+                </div>
+            </form>
+        </Modal>
     );
 }
+
 
 export function UpdateProductModal() {
     const { isUpdateProductModalOpen, CloseUpdateModalOpen } = useUiStore();
     const { product } = useUpdateProducts();
+
+    const [categories, setCategories] = useState([]);
+    const [providers, setProviders] = useState([]);
 
     const [formValues, setFormValues] = useState({
         name: "",
@@ -93,14 +127,33 @@ export function UpdateProductModal() {
         provider: "",
     });
 
+    const getCatProd = async () => {
+        try {
+            const categoryresponse = await GetCategories();
+            const providerResponse = await GetProviders();
+
+            setCategories(categoryresponse);
+            setProviders(providerResponse);
+        } catch (error) {
+            console.error(error);
+        }
+
+    }
+
+    useEffect(() => {
+        getCatProd();
+
+    }, [isUpdateProductModalOpen]);
+
+
     useEffect(() => {
         if (product) {
             setFormValues({
                 name: product.name || "",
-                category: product.categoryId || "",
+                category: product.categoryName || "",
                 stock: product.stock || "",
                 price: product.price || "",
-                provider: product.providerId || "",
+                provider: product.providerName || "",
             });
         }
     }, [product]);
@@ -114,8 +167,8 @@ export function UpdateProductModal() {
     }
 
     function UpdateElement(e) {
-        e.preventDefault();
-        console.log(formValues);
+        e.preventDefault();        
+        UpdateItem(product.id, formValues)
         CloseUpdateModalOpen();
     }
 
@@ -135,7 +188,12 @@ export function UpdateProductModal() {
                 </div>
                 <div className="mb-4">
                     <label htmlFor="category" className="form-label">Category</label>
-                    <input type="text" className="form-control" id="category" name="category" value={formValues.category} onChange={handleChange} required />
+                    <select className="form-control" id="category" name="category" value={formValues.category} onChange={handleChange} required>
+                        <option value="">Select a category</option>
+                        {categories.map(cat => (
+                            <option key={cat.id} value={cat.id}>{cat.categoryName}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="stock" className="form-label">Stock</label>
@@ -147,7 +205,12 @@ export function UpdateProductModal() {
                 </div>
                 <div className="mb-4">
                     <label htmlFor="provider" className="form-label">Provider</label>
-                    <input type="text" className="form-control" id="provider" name="provider" value={formValues.provider} onChange={handleChange} required />
+                    <select className="form-control" id="provider" name="provider" value={formValues.provider} onChange={handleChange} required>
+                        <option value="">Select a provider</option>
+                        {providers.map(prov => (
+                            <option key={prov.id} value={prov.id}>{prov.name}</option>
+                        ))}
+                    </select>
                 </div>
                 <div className="d-flex justify-content-between">
                     <button type="button" className="btn btn-danger mt-2" onClick={CloseUpdateModalOpen}>Cancel</button>
@@ -165,7 +228,7 @@ export function DeletePrpductModal() {
     const prodId = product.id;
 
     function Delete() {
-        console.log(prodId);
+        DeleteItem(prodId)
         CloseDeleteModalOpen();
     }
 

@@ -7,6 +7,8 @@ export function AddProductToSell() {
     const [quantity, useQuantity] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
 
+    const { libraries, AddProduct } = useCashRegisterHandler();
+
     const [productToSave, useProductToSave] = useState({
         title: "",
         id: "",
@@ -15,23 +17,27 @@ export function AddProductToSell() {
         subtotal: 0
     });
 
-    const { AddProduct } = useCashRegisterHandler();
+    const getProds = async () => {
+        try {
+            const response = await GetProducts();
+            useProducts(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     useEffect(() => {
-        const getProds = async () => {
-            try {
-                const response = await GetProducts();
-                useProducts(response);
-            } catch (error) {
-                console.log(error);
-            }
-        };
         getProds();
     }, []);
 
     useEffect(() => {
-        if (productToSave.id && productToSave.quantity) {
-            AddProduct(productToSave);
+        if (productToSave.id && productToSave.quantity>0 && productToSave.quantity <= productToSave.maxStock) {
+            const matches = libraries.filter(prod => prod.id === productToSave.id);
+
+            if (matches.length === 0) {
+                AddProduct(productToSave);
+            } 
         }
         useQuantity(0);
     }, [productToSave]);
@@ -44,8 +50,9 @@ export function AddProductToSell() {
         useProductToSave({
             title: product.name,
             id: product.id,
-            quantity: quantity,
+            quantity: parseInt(quantity),
             pricePerUnit: product.price,
+            maxStock: product.stock,
             subtotal: quantity * product.price
         });
     }
@@ -82,6 +89,7 @@ export function AddProductToSell() {
                                         <span className="input-group-text">Quantity</span>
                                         <input type="number" className="form-control" onChange={SetQuantity}></input>
                                     </div>
+                                    <p>Max: {product.stock}</p>
                                     <a className="btn btn-primary mt-auto addProd" onClick={() => SaveAddProduct(product)}>Add</a>
                                 </div>
                             </div>

@@ -11,8 +11,8 @@ export const productsToSell = createSlice({
         },
         removeProd: (state, action) => {
             state.libraries = state.libraries.filter(prod => prod.id !== action.payload);
-        }
+        },
     }
 })
 
-export const { addProd, removeProd } = productsToSell.actions;
+export const { addProd, removeProd, eliminateList } = productsToSell.actions;

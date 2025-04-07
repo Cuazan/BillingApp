@@ -81,7 +81,7 @@ export function AddProductToSell() {
                     .map((product) => (
                         <div className="col-md-3 col-6 mb-3" key={product.id}>
                             <div className="card h-100 p-2">
-                                <img src={product.images} className="card-img-top border" alt={product.title} />
+                                <img src={product.imageUrl} className="card-img-top border" alt={product.title} />
                                 <div className="card-body d-flex flex-column">
                                     <h5 className="card-title">{product.name}</h5>
                                     <p>${product.price}</p>
